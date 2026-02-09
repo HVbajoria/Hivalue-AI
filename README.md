@@ -1,20 +1,46 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+  <img src="./components/Logo.png" alt="AI Wealth Blueprint" width="200"/>
+  
+  # AI Wealth Blueprint 200+
+  
+  An interactive directory of 200+ AI-powered income streams with detailed blueprints, workflows, and tool recommendations.
 </div>
 
-# Run and deploy your AI Studio app
+## 🚀 Quick Start
 
-This contains everything you need to run your app locally.
+**Prerequisites:** Node.js
 
-View your app in AI Studio: https://ai.studio/apps/drive/1NPiNHQ39uDrIVODAuj4QNp14vkR6vKB4
+```bash
+# Install dependencies
+npm install
 
-## Run Locally
+# Set your Gemini API key in .env.local
+GEMINI_API_KEY=your_api_key_here
 
-**Prerequisites:**  Node.js
+# Run the app
+npm run dev
+```
 
+## 📋 Features
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- 200+ AI-powered income stream ideas
+- Detailed implementation blueprints
+- Step-by-step workflows
+- Tool and resource recommendations
+- Interactive UI with modern design
+
+## 🛠️ Tech Stack
+
+- React + TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
+- Three.js
+
+## 📄 License
+
+MIT License - Copyright (c) 2026 Harshavardhan Bajoria
+
+---
+
+View in AI Studio: https://ai.studio/apps/drive/1NPiNHQ39uDrIVODAuj4QNp14vkR6vKB4
