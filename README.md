@@ -42,5 +42,3 @@ npm run dev
 MIT License - Copyright (c) 2026 Harshavardhan Bajoria
 
 ---
-
-View in AI Studio: https://ai.studio/apps/drive/1NPiNHQ39uDrIVODAuj4QNp14vkR6vKB4
