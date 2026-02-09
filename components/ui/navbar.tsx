@@ -10,9 +10,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a href="#" className="flex items-center space-x-2 group">
-            <div className="p-1.5 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg group-hover:scale-110 transition-transform">
-              <Sparkles className="h-5 w-5 text-white" />
-            </div>
+            <img src="/components/Logo(1).png" alt="Hivalue AI" className="h-10 w-10 group-hover:scale-110 transition-transform" />
             <span className="text-lg font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
               Hivalue AI
             </span>
