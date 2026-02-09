@@ -572,6 +572,8 @@ const Blueprint: React.FC<BlueprintProps> = ({ id, onBack }) => {
   // Load progress and favorites from localStorage
   useEffect(() => {
     if (item) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
       // Load progress
       const savedProgress = localStorage.getItem(`blueprint-progress-${item.id}`);
       if (savedProgress) {
@@ -679,32 +681,32 @@ const Blueprint: React.FC<BlueprintProps> = ({ id, onBack }) => {
   const progress = calculateProgress();
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 animate-fade-in pb-24">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-slide-up pb-24">
       
-      {/* Top Navigation */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+      {/* Enhanced Top Navigation */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
         <div className="flex items-center gap-3">
             <button 
                 onClick={onBack}
-                className="flex items-center text-slate-400 hover:text-white transition-colors group px-3 py-2 rounded-lg hover:bg-slate-800"
+                className="flex items-center text-slate-300 hover:text-white transition-all group px-4 py-2.5 rounded-xl hover:bg-slate-800/80 border border-transparent hover:border-slate-700 font-medium"
             >
-                <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" /> Back to Directory
+                <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" /> Back
             </button>
             <div className="h-6 w-px bg-slate-700 mx-1 hidden md:block"></div>
             <button
                 onClick={toggleFavorite}
-                className={`flex items-center px-3 py-2 rounded-lg transition-all border ${isFavorite ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/50' : 'text-slate-400 border-transparent hover:bg-slate-800 hover:text-white'}`}
+                className={`flex items-center px-4 py-2.5 rounded-xl transition-all border font-medium ${isFavorite ? 'bg-gradient-to-r from-yellow-500/20 to-amber-500/20 text-yellow-400 border-yellow-500/50 shadow-lg shadow-yellow-500/20' : 'text-slate-400 border-slate-700 hover:bg-slate-800/80 hover:text-white hover:border-slate-600'}`}
             >
-                <Star className={`w-4 h-4 mr-2 ${isFavorite ? 'fill-yellow-500' : ''}`} />
-                {isFavorite ? 'Saved' : 'Save to Favorites'}
+                <Star className={`w-4 h-4 mr-2 transition-all ${isFavorite ? 'fill-yellow-400 scale-110' : ''}`} />
+                {isFavorite ? 'Saved' : 'Save'}
             </button>
         </div>
 
-        <div className="flex items-center space-x-3 bg-slate-800 px-4 py-2 rounded-full border border-slate-700 self-start md:self-auto">
-            <div className="w-32 h-2 bg-slate-700 rounded-full overflow-hidden">
-                <div className="h-full bg-emerald-500 transition-all duration-500" style={{ width: `${progress}%` }}></div>
+        <div className="flex items-center space-x-4 bg-gradient-to-r from-slate-800/80 to-slate-900/80 backdrop-blur-sm px-5 py-3 rounded-2xl border border-slate-700/50 shadow-xl self-start md:self-auto">
+            <div className="w-40 h-2.5 bg-slate-700/50 rounded-full overflow-hidden shadow-inner">
+                <div className="h-full bg-gradient-to-r from-emerald-500 to-green-400 transition-all duration-700 shadow-lg shadow-emerald-500/50" style={{ width: `${progress}%` }}></div>
             </div>
-            <span className="text-sm font-medium text-emerald-400">{progress}% Complete</span>
+            <span className="text-sm font-bold text-emerald-400">{progress}%</span>
         </div>
       </div>
 
@@ -713,42 +715,49 @@ const Blueprint: React.FC<BlueprintProps> = ({ id, onBack }) => {
         {/* Main Content (Left) */}
         <div className="xl:col-span-3 space-y-8">
           
-          {/* Header Card */}
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
-             <div className="absolute top-0 right-0 p-4 opacity-10">
-                <Cpu className="w-64 h-64 text-indigo-500" />
+          {/* Enhanced Header Card */}
+          <div className="bg-gradient-to-br from-slate-800/90 via-slate-900/90 to-slate-800/90 border border-slate-700/50 rounded-3xl p-10 shadow-2xl relative overflow-hidden backdrop-blur-sm">
+             {/* Animated Background Elements */}
+             <div className="absolute top-0 right-0 p-4 opacity-5">
+                <Cpu className="w-80 h-80 text-indigo-400 animate-pulse" />
              </div>
+             <div className="absolute -bottom-10 -left-10 w-60 h-60 bg-indigo-500/10 rounded-full blur-3xl"></div>
+             <div className="absolute -top-10 -right-10 w-60 h-60 bg-purple-500/10 rounded-full blur-3xl"></div>
+             
              <div className="relative z-10">
-                <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-4 uppercase tracking-wider">
+                <div className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-300 border border-indigo-500/30 mb-5 uppercase tracking-wider shadow-lg">
+                    <Sparkles className="w-3 h-3 mr-1.5" />
                     {item.category}
                 </div>
-                <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">{item.idea}</h1>
-                <p className="text-slate-300 text-lg leading-relaxed max-w-3xl">{item.description}</p>
+                <h1 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-300 mb-5 leading-tight">{item.idea}</h1>
+                <p className="text-slate-300 text-xl leading-relaxed max-w-3xl font-light">{item.description}</p>
              </div>
           </div>
 
-          {/* Detailed Checklist Steps */}
+          {/* Enhanced Detailed Checklist Steps */}
           <div className="space-y-6">
-            <div className="flex items-center space-x-2 mb-2">
-                <CheckSquare className="w-6 h-6 text-emerald-500" />
-                <h2 className="text-2xl font-bold text-white">Action Plan</h2>
+            <div className="flex items-center space-x-3 mb-4">
+                <div className="p-2 bg-gradient-to-br from-emerald-500/20 to-green-500/20 rounded-lg">
+                    <CheckSquare className="w-6 h-6 text-emerald-400" />
+                </div>
+                <h2 className="text-3xl font-black text-white">Action Plan</h2>
             </div>
             
             {blueprintData.steps.map((step, idx) => {
               const isStepComplete = step.subSteps.every(s => completedSubSteps.has(s.id));
               
               return (
-              <div key={step.id} className="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden shadow-lg transition-all hover:border-slate-600">
-                {/* Step Header */}
-                <div className="bg-slate-800/80 p-5 border-b border-slate-700/50 flex items-start md:items-center justify-between">
+              <div key={step.id} className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 rounded-2xl overflow-hidden shadow-2xl transition-all hover:border-indigo-500/30 hover:shadow-indigo-500/10 backdrop-blur-sm">
+                {/* Enhanced Step Header */}
+                <div className="bg-gradient-to-r from-slate-800/90 to-slate-900/90 p-6 border-b border-slate-700/50 flex items-start md:items-center justify-between backdrop-blur-sm">
                     <div>
-                        <h3 className="text-xl font-bold text-white flex items-center">
-                            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-600 text-white text-sm font-bold mr-3 shadow-lg shadow-indigo-900/50">
+                        <h3 className="text-2xl font-black text-white flex items-center">
+                            <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 text-white text-base font-black mr-4 shadow-xl shadow-indigo-900/50">
                                 {idx + 1}
                             </span>
                             {step.title}
                         </h3>
-                        <p className="text-slate-400 text-sm mt-1 ml-11">{step.description}</p>
+                        <p className="text-slate-400 text-base mt-2 ml-14 font-light">{step.description}</p>
                     </div>
                     <button
                         onClick={() => toggleStepCompletion(step)}
@@ -774,9 +783,9 @@ const Blueprint: React.FC<BlueprintProps> = ({ id, onBack }) => {
                             return (
                                 <div 
                                     key={subStep.id} 
-                                    className={`flex flex-col p-3 rounded-lg transition-all cursor-pointer group 
-                                        ${isChecked ? 'bg-emerald-900/10' : 'hover:bg-slate-800'} 
-                                        ${isUserCore ? 'border border-yellow-500/30 bg-yellow-500/5 shadow-[0_0_15px_-3px_rgba(234,179,8,0.1)]' : 'border border-transparent'}
+                                    className={`flex flex-col p-4 rounded-xl transition-all cursor-pointer group 
+                                        ${isChecked ? 'bg-gradient-to-r from-emerald-900/20 to-green-900/10 border border-emerald-500/20' : 'hover:bg-slate-800/50 border border-transparent hover:border-slate-700'} 
+                                        ${isUserCore ? 'border-yellow-500/40 bg-gradient-to-r from-yellow-500/10 to-amber-500/5 shadow-[0_0_20px_-3px_rgba(234,179,8,0.2)]' : ''}
                                     `}
                                     onClick={() => toggleSubStep(subStep.id)}
                                 >
@@ -873,11 +882,13 @@ const Blueprint: React.FC<BlueprintProps> = ({ id, onBack }) => {
             })}
           </div>
 
-          {/* Visual Workflow */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8">
-             <div className="flex items-center space-x-2 mb-6">
-                <Layers className="w-6 h-6 text-blue-500" />
-                <h2 className="text-2xl font-bold text-white">Process Overview</h2>
+          {/* Enhanced Visual Workflow */}
+          <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-slate-700/50 rounded-3xl p-10 backdrop-blur-sm shadow-2xl">
+             <div className="flex items-center space-x-3 mb-8">
+                <div className="p-2 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-lg">
+                    <Layers className="w-6 h-6 text-blue-400" />
+                </div>
+                <h2 className="text-3xl font-black text-white">Process Overview</h2>
             </div>
             <WorkflowVisualizer steps={blueprintData.steps} completedSubSteps={completedSubSteps} />
           </div>
@@ -888,11 +899,13 @@ const Blueprint: React.FC<BlueprintProps> = ({ id, onBack }) => {
         <div className="space-y-6">
           <div className="sticky top-24 space-y-6">
             
-            {/* Toolkit Card */}
-            <div className="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-xl">
-                <h3 className="text-lg font-bold text-white mb-6 flex items-center">
-                    <span className="w-2 h-6 bg-indigo-500 rounded-full mr-3"></span>
-                    Recommended Tools
+            {/* Enhanced Toolkit Card */}
+            <div className="bg-gradient-to-br from-slate-800/90 to-slate-900/90 border border-slate-700/50 rounded-2xl p-6 shadow-2xl backdrop-blur-sm">
+                <h3 className="text-xl font-black text-white mb-6 flex items-center">
+                    <div className="p-1.5 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-lg mr-3">
+                        <Wrench className="w-5 h-5 text-indigo-400" />
+                    </div>
+                    Toolkit
                 </h3>
                 
                 <div className="space-y-6">
@@ -911,7 +924,7 @@ const Blueprint: React.FC<BlueprintProps> = ({ id, onBack }) => {
                                 href={tool.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex flex-col p-3 rounded-lg bg-slate-900 border border-slate-700 hover:border-indigo-500 hover:shadow-indigo-500/20 hover:-translate-y-0.5 transition-all group"
+                                className="flex flex-col p-3.5 rounded-xl bg-slate-900/80 border border-slate-700/50 hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 group backdrop-blur-sm"
                                 >
                                 <div className="flex justify-between items-center mb-1">
                                     <span className="font-semibold text-slate-200 group-hover:text-indigo-400">{tool.name}</span>
@@ -928,17 +941,19 @@ const Blueprint: React.FC<BlueprintProps> = ({ id, onBack }) => {
 
             {/* Related Opportunities Card */}
             {relatedIdeas.length > 0 && (
-            <div className="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-xl">
-                <h3 className="text-lg font-bold text-white mb-4 flex items-center">
-                    <Sparkles className="w-5 h-5 text-indigo-400 mr-2" />
-                    Related Opportunities
+            <div className="bg-gradient-to-br from-slate-800/90 to-slate-900/90 border border-slate-700/50 rounded-2xl p-6 shadow-2xl backdrop-blur-sm">
+                <h3 className="text-xl font-black text-white mb-5 flex items-center">
+                    <div className="p-1.5 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-lg mr-3">
+                        <Sparkles className="w-5 h-5 text-indigo-400" />
+                    </div>
+                    Related
                 </h3>
                 <div className="space-y-3">
                     {relatedIdeas.map((related) => (
                         <a 
                             key={related.id}
                             href={`#idea/${related.id}`}
-                            className="block p-3 rounded-lg bg-slate-900/50 border border-slate-700/50 hover:bg-slate-800 hover:border-indigo-500 hover:shadow-md transition-all group"
+                            className="block p-4 rounded-xl bg-slate-900/60 border border-slate-700/50 hover:bg-slate-800/80 hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-500/10 hover:-translate-y-0.5 transition-all duration-300 group backdrop-blur-sm"
                         >
                             <h4 className="text-sm font-semibold text-slate-200 group-hover:text-indigo-400 mb-1 leading-tight">
                                 {related.idea}
@@ -953,13 +968,16 @@ const Blueprint: React.FC<BlueprintProps> = ({ id, onBack }) => {
             </div>
             )}
 
-            {/* Motivation / Tip Card */}
-            <div className="bg-gradient-to-br from-indigo-900/20 to-purple-900/20 border border-indigo-500/20 rounded-xl p-6">
-                <h4 className="text-indigo-400 font-bold mb-2 flex items-center">
-                    <Save className="w-4 h-4 mr-2" /> Pro Tip
+            {/* Enhanced Motivation / Tip Card */}
+            <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 border border-indigo-500/30 rounded-2xl p-6 shadow-xl backdrop-blur-sm">
+                <h4 className="text-indigo-300 font-black mb-3 flex items-center text-lg">
+                    <div className="p-1.5 bg-indigo-500/20 rounded-lg mr-2">
+                        <Save className="w-4 h-4" />
+                    </div>
+                    Pro Tip
                 </h4>
-                <p className="text-sm text-slate-300">
-                    Your progress is saved automatically on this device. Bookmark this page to come back and continue your journey later.
+                <p className="text-sm text-slate-300 leading-relaxed">
+                    Your progress is saved automatically. Bookmark this page to continue your journey anytime.
                 </p>
             </div>
             

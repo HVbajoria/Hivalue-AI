@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Blueprint from './pages/Blueprint';
+import AboutSection from './components/ui/about-section';
 
 const App: React.FC = () => {
   // Simple hash routing
@@ -10,7 +11,11 @@ const App: React.FC = () => {
   useEffect(() => {
     const handleHashChange = () => {
       // remove # from hash
-      setCurrentRoute(window.location.hash.slice(1));
+      const route = window.location.hash.slice(1);
+      setCurrentRoute(route);
+      
+      // Always use dark mode
+      document.body.classList.add('dark-mode');
     };
 
     // Set initial route
@@ -28,6 +33,8 @@ const App: React.FC = () => {
   if (currentRoute.startsWith('idea/')) {
     const id = currentRoute.split('/')[1];
     content = <Blueprint id={id} onBack={() => navigateTo('')} />;
+  } else if (currentRoute === 'about') {
+    content = <AboutSection />;
   } else {
     content = <Home onNavigate={(id) => navigateTo(`idea/${id}`)} />;
   }
